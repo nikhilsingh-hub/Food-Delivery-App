@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Input from '../components/elements/Input'
+import { app } from '../firebase-config.js';
 
 function SignUp() {
     let navigate = useNavigate();

@@ -14,7 +14,7 @@ const fadeInUp = {
 
 const About = () => {
     return (
-        <div id="about" className='w-full bg-white mt-14'>
+        <div id="about" className='w-full bg-[#FCDE58] mt-14'>
             <div className='p-8 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-10'>
                 <motion.div
                     initial="hidden"

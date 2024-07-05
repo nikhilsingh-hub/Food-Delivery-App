@@ -6,6 +6,7 @@ import { Tabs } from "../components/elements/Tabs";
 import { addToCart } from "../store/slices/cartSlice";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Link, useNavigate } from 'react-router-dom'
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -54,11 +55,14 @@ const Menu = () => {
       };
 
     return (
+
         <div className="bg-white mt-12">
+        
             {
                 products.status !== 'fulfilled' ?
                     <div>loading...</div> :
                     <div>
+                        <Link to="/" className="text-lg hover:text-yellow-300 transition duration-300">Back to Home</Link>
                         {
                             products.products.length ?
                                 <Tabs
@@ -84,6 +88,7 @@ const Menu = () => {
                     </div>
             }
         </div>
+       
     )
 }
 

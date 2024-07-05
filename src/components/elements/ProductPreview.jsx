@@ -1,5 +1,5 @@
-import React from 'react'
-import {ProductPreviewCard} from './ProductPreviewCard'
+import React, {useState, useEffect} from 'react'
+import ProductPreviewCard from './ProductPreviewCard'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch } from 'react-redux';
@@ -30,7 +30,7 @@ function ProductPreview() {
       };
 
       useEffect(() => {
-        fetch('http://localhost:8080/apiProduct/products')
+        fetch('http://localhost:8080/apiP/products')
           .then(response => response.json())
           .then((data) => {
               setProducts(data.data);
@@ -43,7 +43,7 @@ function ProductPreview() {
       }
 
   return (
-    <div className="container mx-auto pb-4 w-2/3 text-black rounded-lg top-0">
+    <div className="container mx-auto pb-4 w-2/3 text-black rounded-lg">
         <Carousel responsive={responsive}>
             {
                 products.length > 0  && products.map((product, index) => ( <div className="w-full p-3" key={index}> 

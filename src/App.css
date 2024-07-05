@@ -33,3 +33,71 @@
   transition: transform 0.5s ease-in-out;
 }
 
+/* Add this CSS to your styles */
+ .bg-banner {
+  background-color: #d8f361;
+  background-image: url('./assets/images/banner_bg.jpg'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+} 
+
+
+.slide-in-left {
+  animation: slideInLeft 2s ease-out forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 2s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+      transform: translateX(-100%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  100% {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+
+/* Typewriter effect */
+@keyframes typewriter {
+  0% {
+      width: 0;
+  }
+  100% {
+      width: 100%;
+  }
+}
+
+@keyframes blinkCaret {
+  0%, 100% {
+      border-color: transparent;
+  }
+  50% {
+      border-color: white;
+  }
+}
+
+.typewriter h2, .typewriter p {
+  overflow: hidden;
+  border-right: .15em solid white;
+  white-space: nowrap;
+  margin: 0 auto;
+  letter-spacing: .15em;
+  animation:
+      typewriter 4s steps(40, end),
+      blinkCaret .75s step-end infinite;
+}

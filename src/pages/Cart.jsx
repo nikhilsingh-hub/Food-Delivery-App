@@ -6,7 +6,7 @@ import { cartProducts } from '../store/slices/cartSlice';
 import { ReactComponent as ArrowRightSvg } from "../assets/icons/arrow-right-long-svgrepo-com.svg";
 import AddressForm from  '../components/elements/AddressForm'
 import { ProductsSummary } from '../components/elements/ProductSummary';
-
+import { Link, useNavigate } from 'react-router-dom'
 
 function Cart() {
     const allCartProducts = useSelector(cartProducts)
@@ -19,6 +19,9 @@ function Cart() {
 
   return (
     <div className='bg-white w-full h-screen mt-14 flex items-center justify-center'>
+        <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-lg hover:text-yellow-300 transition duration-300">Home</Link>
+        </div>
         <div className='bg-white text-slate-900 w-2/3 rounded-lg shadow-md mt-2 mx-auto border border-gray-200
         sm:p-6 lg:p-8'>
             <Tabs list = {allTabs} activeTab={currentTab} onTabSwitch = {handleSwitch} />

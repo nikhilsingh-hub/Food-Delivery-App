@@ -8,6 +8,7 @@ import Button from '../elements/Button'
 
 
 function Header({cartCount}) {
+
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -36,17 +37,13 @@ function Header({cartCount}) {
 }, [])
 
 return (
-    <nav className="bg-yellow-500 text-white fixed top-0 w-full shadow-lg z-50">
+    <nav className="bg-[#FCDE58] text-white fixed top-0 w-full  z-50 border-none">
     <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <div className="flex items-center">
-            <Link to="/" className="flex items-center text-white no-underline font-bold text-2xl lg:text-4xl">
+            <Link to="/" className="flex items-center text-black no-underline font-bold text-2xl lg:text-4xl">
                 <img src={myIcon} alt="logo" className="w-12 h-12 mr-2 scooter-animation" />
-                Food-e
+                Food-E
             </Link>
-        </div>
-        <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-lg hover:text-yellow-300 transition duration-300">Home</Link>
-            <Link to="#about" className="text-lg hover:text-yellow-300 transition duration-300">About</Link>
         </div>
         <div className="flex items-center space-x-4">
             {isLoggedIn ? (
@@ -68,7 +65,7 @@ return (
                     <Link to="/login" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
                         Log In
                     </Link>
-                    <Link to="/register" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    <Link to="/signup" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
                         Sign Up
                     </Link>
                 </>

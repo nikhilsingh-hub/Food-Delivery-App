@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { cartProducts } from "../../store/slices/cartSlice";
-import { ProductSummaryCard } from "./ProductSummaryCard";
+import { ProductsSummaryCard } from "./ProductSummaryCard";
 
 export const ProductsSummary = () => {
     const cart = useSelector(cartProducts);
@@ -9,7 +9,7 @@ export const ProductsSummary = () => {
         <div className="flex flex-col">
             { cart && cart?.map((product, index) => {
                 return (
-                    <ProductSummaryCard product={product} key={index} />
+                    <ProductsSummaryCard product={product} key={index} />
                 )
             })}
         </div>
