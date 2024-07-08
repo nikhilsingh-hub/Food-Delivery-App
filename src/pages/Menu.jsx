@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, selectAllProducts } from "../store/slices/productSlice";
 import ProductDetailCard from "../components/elements/ProductDetailCard";
 import { Tabs } from "../components/elements/Tabs";
-import { addToCart } from "../store/slices/cartSlice";
+import { addToCart, incrementProductAmount, cartProducts } from "../store/slices/cartSlice";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom'
@@ -14,13 +14,20 @@ const Menu = () => {
     const products = useSelector(selectAllProducts);
     const [activeTab, setActiveTab] = useState('');
     const [activeTabIndex, setActiveTabIndex] = useState(0);
+    const allProducts = useSelector(cartProducts)
 
     useEffect(() => {
         dispatch(fetchProducts())
     }, [])
 
     const onAddProductListener = (product) => {
-        dispatch(addToCart(product))
+        const isAvailable = allProducts.some(ele => ele._id === product._id);
+    
+        if (isAvailable) {
+            dispatch(incrementProductAmount(product));
+        } else {
+            dispatch(addToCart(product));
+        }
     }
 
     const onTabSwitch = (newActiveTab) => {
@@ -78,7 +85,10 @@ const Menu = () => {
                                     {
                                         products.products.length ? products.products[activeTabIndex].products.map((product, index) => {
                                             return (
-                                                <ProductDetailCard key={index} product={product} onAddProduct={onAddProductListener} />
+                                                <div key={index}>
+                                                    <ProductDetailCard product={product} onAddProduct={onAddProductListener} />
+                                                </div>
+                                                
                                             )
                                         })
                                             : "No products"

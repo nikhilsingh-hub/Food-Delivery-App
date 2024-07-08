@@ -9,31 +9,31 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            // return { products: [...state.products, {...action.payload, amount: 1}]}
-            var isPresent= false;
-            state.products.forEach((product) => {
-                if(product.id === action.payload.id) isPresent = true;
-            })
-            if(isPresent) return {products: state.products.map(product => product.id === action.payload.id? {...product, amount: product.amount+1} : product)}
-
-            else return { products: [...state.products, {...action.payload, amount: 1}]}
-
+            return { products: [...state.products, {...action.payload, amount: 1}]}
         },
         clearCart: (state) => {
-            return { products: []}
+            return { products: [] }
         },
         incrementProductAmount: (state, action) => {
-            // console.log('increment');
-            return { products: state.products.map(product => product.id === action.payload.id ? {...product, amount: product.amount + 1} : product)}
+            return { products: state.products.map(product => product._id === action.payload._id ? { ...product, amount: product.amount + 1 } : product) }
         },
         decrementProductAmount: (state, action) => {
-            return { products: state.products.map(product => product.id === action.payload.id ? {...product, amount: product.amount - 1} : product)}
+            var myproducts = state.products.map((product) => {
+                if (product._id === action.payload._id) {
+                    return { ...product, amount: product.amount - 1 };
+                }
+                else return product;
+            })
+
+            var actualProducts = myproducts.filter((product) => product.amount !== 0);
+            return { products: actualProducts }
+
         }
     }
 })
 
 export const cartProducts = state => state.cart.products
 
-export const {  addToCart, clearCart, incrementProductAmount, decrementProductAmount } = cartSlice.actions
+export const { addToCart, clearCart, incrementProductAmount, decrementProductAmount } = cartSlice.actions
 
 export default cartSlice.reducer

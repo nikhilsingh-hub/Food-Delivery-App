@@ -2,16 +2,16 @@ import React, {useState, useEffect} from 'react'
 import ProductPreviewCard from './ProductPreviewCard'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../store/slices/cartSlice';
-import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, incrementProductAmount, cartProducts } from '../../store/slices/cartSlice';
 
 
 function ProductPreview() {
 
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
-
+    const allProducts = useSelector(cartProducts)
+  
     const responsive = {
         superLargeDesktop: {
           breakpoint: { max: 4000, min: 3000 },
@@ -41,7 +41,14 @@ function ProductPreview() {
       }, [])
 
       const onAddProductListener = (product) => {
-        dispatch(addToCart(product))
+        const isAvailable = allProducts.some(ele => ele._id === product._id);
+    
+        if (isAvailable) {
+            dispatch(incrementProductAmount(product));
+        } else {
+            dispatch(addToCart(product));
+        }
+        
       }
 
   return (

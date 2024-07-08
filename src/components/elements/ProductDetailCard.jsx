@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-function ProductDetailCard({ product, onAddProduct }) {
+function ProductDetailCard({product, onAddProduct }) {
     return (
       <div className="p-4 m-4 rounded-lg bg-slate-50 shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl">
         <div className="flex flex-col items-center justify-between">
@@ -20,7 +20,7 @@ function ProductDetailCard({ product, onAddProduct }) {
         </div>
         <div className="flex justify-end w-full">
           <button
-            onClick={onAddProduct}
+            onClick={() => onAddProduct(product)}
             className="bg-yellow-200 p-2 text-black rounded-lg transition duration-300 hover:bg-yellow-300 hover:shadow-md"
           >
             Add to Cart
