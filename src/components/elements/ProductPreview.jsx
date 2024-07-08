@@ -4,9 +4,11 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/slices/cartSlice';
+import { useInView } from 'react-intersection-observer';
 
 
 function ProductPreview() {
+
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
 
@@ -38,7 +40,7 @@ function ProductPreview() {
           .catch(e => console.log(e))
       }, [])
 
-      const onAddProduct = (product) => {
+      const onAddProductListener = (product) => {
         dispatch(addToCart(product))
       }
 
@@ -47,8 +49,7 @@ function ProductPreview() {
         <Carousel responsive={responsive}>
             {
                 products.length > 0  && products.map((product, index) => ( <div className="w-full p-3" key={index}> 
-                            <ProductPreviewCard product={product} onAddProduct={onAddProduct} />  
-
+                            <ProductPreviewCard product={product} onAddProduct={onAddProductListener} />
                 </div> ))
             }
         </Carousel>

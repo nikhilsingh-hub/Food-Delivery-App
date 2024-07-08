@@ -3,12 +3,13 @@ import myIcon from "../../assets/images/food_delivery_icon.png"
 import cartIcon from "../../assets/icons/cart.svg"
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../elements/Button'
+import { useSelector } from "react-redux";
+import {cartProducts} from '../../store/slices/cartSlice';
 
 
 
-
-function Header({cartCount}) {
-
+function Header() {
+  const cartProductList = useSelector(cartProducts);
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -50,9 +51,9 @@ return (
                 <>
                     <Link to="/cart" className="relative">
                         <img src={cartIcon} alt="cart" className="w-8 h-8" />
-                        {cartCount > 0 && (
+                        {cartProductList.length > 0 && (
                             <div className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                                {cartCount}
+                                {cartProductList? cartProductList.length : 0}
                             </div>
                         )}
                     </Link>

@@ -8,7 +8,7 @@ function ProductPreviewCard({product, onAddProduct}) {
     <img src={product.imageUrl} alt={"no image"} />
     <h2 className="pb-2 text-lg">{product.name}</h2>
     <p className="mb-2 h-20 line-clamp-4">{product.desciption}</p>
-    <AddProduct onAddProduct={onAddProduct} />
+    <AddProduct onAddProductListen={onAddProduct} product={product}/>
 </div>
   )
 }

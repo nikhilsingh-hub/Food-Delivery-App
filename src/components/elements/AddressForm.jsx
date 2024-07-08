@@ -81,7 +81,7 @@ function AddressForm({ onTabSwitch }) {
                 </div>
             </div>
             <div className='flex justify-end p-2'>
-            <Button variant="dark" className="flex items-center" type="submit" size='medium'><span className="mr-1">Next</span><ArrowRightSvg /></Button>
+            <Button variant="dark" className="flex items-center text-white" type="submit"><span className="mr-1">Next</span><ArrowRightSvg /></Button>
             </div>
 
         </form>
