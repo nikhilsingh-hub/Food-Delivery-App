@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useDispatch} from 'react-redux'
+import {login, logout} from "../store/slices/authSlice"
 
 function Login() {
     let navigate = useNavigate();
+    const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
 
@@ -22,8 +25,8 @@ function Login() {
                 uid = response.user.uid;
                 sessionStorage.setItem('User Id', uid);
                 sessionStorage.setItem('Auth token', response._tokenResponse.refreshToken)
-                window.dispatchEvent(new Event("storage"))
                 setLoading(false);
+                dispatch(login());
                 toast.success('Successful Login!🎉', {
                     position: "top-right",
                     autoClose: 5000,

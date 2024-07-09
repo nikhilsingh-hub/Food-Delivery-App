@@ -8,19 +8,24 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from 'react-router-dom'
 import { ReactComponent as ArrowleftSvg } from '../assets/icons/arrow-left-svgrepo-com.svg'
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const products = useSelector(selectAllProducts);
     const [activeTab, setActiveTab] = useState('');
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const allProducts = useSelector(cartProducts)
+    const isLoggedIn = useSelector((state) => state.auth.status);
 
     useEffect(() => {
         dispatch(fetchProducts())
     }, [])
 
     const onAddProductListener = (product) => {
+        if(!isLoggedIn) navigate('/login')
+            
         const isAvailable = allProducts.some(ele => ele._id === product._id);
     
         if (isAvailable) {

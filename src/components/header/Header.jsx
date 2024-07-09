@@ -3,8 +3,9 @@ import myIcon from "../../assets/images/food_delivery_icon.png"
 import cartIcon from "../../assets/icons/cart.svg"
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Button from '../elements/Button'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { cartProducts } from '../../store/slices/cartSlice';
+import {login, logout} from "../../store/slices/authSlice"
 
 
 
@@ -12,37 +13,40 @@ function Header() {
     const cartProductList = useSelector(cartProducts);
     const navigate = useNavigate();
     const location = useLocation();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const dispatch = useDispatch();
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isLoggedIn = useSelector((state) => state.auth.status);
 
     const handleLogout = () => {
         sessionStorage.removeItem('Auth token');
         sessionStorage.removeItem('User Id');
         window.dispatchEvent(new Event("storage"))
+        dispatch(logout())
         navigate("/")
     }
 
     const checkAuthToken = () => {
         const token = sessionStorage.getItem('Auth token');
         if (token) {
-            setIsLoggedIn(true);
+            dispatch(login());
         } else {
-            setIsLoggedIn(false);
+            dispatch(logout())
         }
     }
 
     useEffect(() => {
-       checkAuthToken();
+    //    checkAuthToken();
 
         // window.addEventListener('storage', checkAuthToken);
-        const handleStorageChange = () => {
-            checkAuthToken();
-        };
+        // const handleStorageChange = () => {
+        //     checkAuthToken();
+        // };
 
-        window.addEventListener('storage', handleStorageChange);
+        // window.addEventListener('storage', handleStorageChange);
 
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-        }
+        // return () => {
+        //     window.removeEventListener('storage', handleStorageChange);
+        // }
         // return () => {
         //     window.removeEventListener('storage', checkAuthToken);
         // }

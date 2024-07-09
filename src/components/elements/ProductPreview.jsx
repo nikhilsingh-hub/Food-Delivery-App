@@ -4,13 +4,16 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementProductAmount, cartProducts } from '../../store/slices/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 function ProductPreview() {
 
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const allProducts = useSelector(cartProducts)
+    const isLoggedIn = useSelector((state) => state.auth.status);
   
     const responsive = {
         superLargeDesktop: {
@@ -41,6 +44,8 @@ function ProductPreview() {
       }, [])
 
       const onAddProductListener = (product) => {
+        if(!isLoggedIn) navigate('/login')
+          
         const isAvailable = allProducts.some(ele => ele._id === product._id);
     
         if (isAvailable) {
